@@ -56,6 +56,7 @@ int main(){
     misc
     <<nx<<'\n'
     <<ny<<'\n'
+    <<d<<'\n'
     <<dt<<'\n'
     ;
 
