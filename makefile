@@ -27,6 +27,6 @@ clean:
 	rm -f $(EXEC)
 	rm -f u.dat misc.dat fps.dat
 	rm -f $(FRMDIR)/.frame_*.png $(FRMDIR)/.frames_done
-	rm -f wave.mp4
+	#rm -f wave.mp4
 
 .PHONY: all clean
