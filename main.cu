@@ -6,13 +6,13 @@ int main(){
     // fali
     const double c = 1.0;
     // techniczne
-    const int nmax = 10;
-    const int mmax = 10;
+    const int nmax = 5;
+    const int mmax = 5;
     const double d = 0.01;
     const double dt = 0.05;
     // animacji
-    const double tmax = 20.0;
-    const int fps = 24;
+    const double tmax = 10.0;
+    const int fps = 10;
     const double seconds = 10.0;
 
     // parametry wtórne
@@ -47,7 +47,7 @@ int main(){
     // mierzenie czasu
     auto start = chrono::high_resolution_clock::now();
 
-    // pętla po czasie
+    // pętla po czasie // trzeba ją zmienić. założenie jest błędne, chcemy zapisywać każdą klatkę bo rozwiązanie nie zależy od dt
     for (int it=0; it<=itmax; it++){
         if (it%ip==0) cout<<"\r"<<it/ip<<"%"<<flush;
         t = it*dt;
