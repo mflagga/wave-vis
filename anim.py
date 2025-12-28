@@ -28,12 +28,13 @@ for i in it:
     mask = data[:,0]==i
     u = data[mask,1].reshape((nx+1,ny+1)).T
     ax.plot_surface(X,Y,u,edgecolor='royalblue',lw=0.5,rstride=8,cstride=8,alpha=0.3)
-    ax.contour(X, Y, u, zdir='z', offset=umin - 0.1*(umax - umin), cmap=cmap1)
-    ax.contour(X, Y, u, zdir='x', offset=x.min(), cmap=cmap1)
-    ax.contour(X, Y, u, zdir='y', offset=y.max(), cmap=cmap1)
+    ax.set_title(rf'$t = {i*dt:.3f}$')
+    #ax.contour(X, Y, u, zdir='z', offset=umin - 0.1*(umax - umin), cmap=cmap1)
+    #ax.contour(X, Y, u, zdir='x', offset=x.min(), cmap=cmap1)
+    #ax.contour(X, Y, u, zdir='y', offset=y.max(), cmap=cmap1)
     ax.set(xlim=(x.min(), x.max()), ylim=(y.min(), y.max()), 
            zlim=(umin, umax),
-           xlabel='X', ylabel='Y', zlabel='Z')
+           xlabel='x', ylabel='y', zlabel=rf'$u(x,y,t)$')
     filename=os.path.join('frames',f'frame_{i//it[1]:05d}.png')
     plt.savefig(filename)
     ax.cla()
