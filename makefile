@@ -15,7 +15,10 @@ $(EXEC): main.cu header.cuh
 u.dat misc.dat fps.dat: $(EXEC)
 	./$(EXEC)
 
-$(FRMDIR)/.frames_done: misc.dat u.dat anim.py
+$(FRMDIR):
+	mkdir -p $(FRMDIR)
+
+$(FRMDIR)/.frames_done: misc.dat u.dat anim.py $(FRMDIR)
 	rm -f $(FRMDIR)/frame_*.png
 	$(PC) anim.py
 	@touch $(FRMDIR)/.frames_done
