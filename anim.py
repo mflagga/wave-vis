@@ -21,6 +21,8 @@ it = np.unique(data[:,0]).astype(int)
 
 cmap1 = 'jet'
 
+print(f'FRAMES = {len(it)}')
+
 ax = plt.figure(figsize=(6,6)).add_subplot(projection='3d')
 for i in it:
     mask = data[:,0]==i
