@@ -22,6 +22,7 @@ int main(){
     double t;
     const int itmax = int(tmax/dt);
     const int co_ktora=int(itmax/(fps*seconds));
+    const int ip = itmax/100;
 
     // architektura
     int tp1 = 256;
@@ -48,11 +49,13 @@ int main(){
 
     // pętla po czasie
     for (int it=0; it<=itmax; it++){
+        if (it%ip==0) cout<<"\r"<<it/ip<<"%"<<flush;
         t = it*dt;
         fillU<<<blocks2,threads2>>>(u,t,nx,ny,nmax,mmax,x,y,c);
         cudaDeviceSynchronize();
         if (it%co_ktora==0) saveU(u,uC,nx,ny,N,ufile,it);
     }
+    cout<<'\n';
 
     // mierzenie czasu
     auto stop = chrono::high_resolution_clock::now();
