@@ -11,9 +11,9 @@ int main(){
     const double d = 0.01;
     const double dt = 0.05;
     // animacji
-    const double tmax = 5.0;
-    const int fps = 12;
-    const double seconds = 5.0;
+    const double tmax = 20.0;
+    const int fps = 24;
+    const double seconds = 10.0;
 
     // parametry wtórne
     const int nx = int(M_PI/d);
@@ -43,6 +43,9 @@ int main(){
     // zmienne do petli
     ofstream ufile("u.dat");
 
+    // mierzenie czasu
+    auto start = chrono::high_resolution_clock::now();
+
     // pętla po czasie
     for (int it=0; it<=itmax; it++){
         t = it*dt;
@@ -50,6 +53,11 @@ int main(){
         cudaDeviceSynchronize();
         if (it%co_ktora==0) saveU(u,uC,nx,ny,N,ufile,it);
     }
+
+    // mierzenie czasu
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
+    cout<<"Czas pętli: "<<duration.count()<<" ms\n";
 
     // przekaz c++ -> python
     ofstream misc("misc.dat");
