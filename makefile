@@ -12,7 +12,7 @@ all: wave.mp4
 $(EXEC): main.cu header.cuh
 	$(CC) main.cu $(CFLAGS) -o $(EXEC)
 
-*.dat: $(EXEC)
+u.dat misc.dat fps.dat: $(EXEC)
 	./$(EXEC)
 
 $(FRMDIR)/.frames_done: misc.dat u.dat anim.py
