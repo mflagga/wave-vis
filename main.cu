@@ -12,7 +12,7 @@ int main(){
     const double dt = 0.05;
     // animacji
     const double tmax = 5.0;
-    const int fps = 12;
+    const int fps = 1;
     const double seconds = 5.0;
 
     // parametry wtórne
@@ -59,6 +59,10 @@ int main(){
     <<d<<'\n'
     <<dt<<'\n'
     ;
+    // przekaz c++ -> ffmpeg
+    ofstream fpsfile("fps.dat");
+    fpsfile<<fps;
+    fpsfile.close();
 
     // czystki
     cudaFree(x);
