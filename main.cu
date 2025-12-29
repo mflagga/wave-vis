@@ -4,15 +4,15 @@ int main(){
 
     // parametry
     // fali
-    const double c = 2.0;
+    const double c = 1.0;
     // techniczne
-    const int nmax = 15;
-    const int mmax = 15;
+    const int nmax = 10;
+    const int mmax = 10;
     const double d = 0.01;
     // animacji
-    const double tmax = 5.0;
-    const int fps = 12;
-    const double seconds = 5.0;
+    const double tmax = 10.0;
+    const int fps = 15;
+    const double seconds = 10.0;
 
     // parametry wtórne
     const int nx = int(M_PI/d);
