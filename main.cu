@@ -46,7 +46,7 @@ int main(){
     // mierzenie czasu
     auto start = chrono::high_resolution_clock::now();
 
-    // pętla po czasie // trzeba ją zmienić. założenie jest błędne, chcemy zapisywać każdą klatkę bo rozwiązanie nie zależy od dt
+    // pętla po czasie
     for (int it=0; it<=itmax; it++){
         if (it%int(ip)==0) cout<<'\r'<<int(it/ip)<<'%'<<flush;
         t = it*dt*tmax/seconds;
