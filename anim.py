@@ -18,6 +18,7 @@ y = np.arange(0,pi,d)
 X, Y = np.meshgrid(x,y)
 umax = data[:,1].max()
 umin = data[:,1].min()
+uabs = max([abs(umin), abs(umax)])
 
 it = np.unique(data[:,0]).astype(int)
 
@@ -30,16 +31,18 @@ for i in it:
     mask = data[:,0]==i
     u = data[mask,1].reshape((nx+1,ny+1)).T
     ax.plot_surface(X,Y,u
+                    ,edgecolor='#000000'
+                    ,lw=0.1
                     ,cmap='seismic'
-                    ,vmin=umin,vmax=umax
-                    ,alpha=0.9
+                    ,vmin=-uabs,vmax=uabs
+                    ,alpha=1.0
                     )
     ax.set_title(rf'$t = {i*dt*tmax/sec:.3f}$')
     #ax.contour(X, Y, u, zdir='z', offset=umin - 0.1*(umax - umin), cmap=cmap1)
     #ax.contour(X, Y, u, zdir='x', offset=x.min(), cmap=cmap1)
     #ax.contour(X, Y, u, zdir='y', offset=y.max(), cmap=cmap1)
-    ax.set(xlim=(x.min(), x.max()), ylim=(y.min(), y.max()), 
-           zlim=(umin, umax),
+    ax.set(xlim=(x.min(), x.max()), ylim=(y.min(), y.max()), zlim=(-uabs, uabs),
+           xticks=np.linspace(0,pi,5), yticks=np.linspace(0,pi,5),
            xlabel='x', ylabel='y', zlabel=rf'$u(x,y,t)$')
     filename=os.path.join('frames',f'frame_{i//it[1]:05d}.png')
     plt.savefig(filename)
