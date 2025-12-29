@@ -48,7 +48,7 @@ int main(){
 
     // pętla po czasie // trzeba ją zmienić. założenie jest błędne, chcemy zapisywać każdą klatkę bo rozwiązanie nie zależy od dt
     for (int it=0; it<=itmax; it++){
-        if (it%int(ip)==0) cout<<"\r"<<int(it/ip)<<"%"<<flush;
+        if (it%int(ip)==0) cout<<'\r'<<int(it/ip)<<'%'<<flush;
         t = it*dt*tmax/seconds;
         fillU<<<blocks2,threads2>>>(u,t,nx,ny,nmax,mmax,x,y,c);
         cudaDeviceSynchronize();
