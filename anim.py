@@ -32,7 +32,7 @@ for i in it:
     u = data[mask,1].reshape((nx+1,ny+1)).T
     ax.plot_surface(X,Y,u
                     ,edgecolor='#000000'
-                    ,lw=0.1
+                    ,lw=0.05
                     ,cmap='seismic'
                     ,vmin=-uabs,vmax=uabs
                     ,alpha=1.0
