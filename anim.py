@@ -10,6 +10,8 @@ nx = int(misc[0])
 ny = int(misc[1])
 d = misc[2]
 dt = misc[3]
+sec = misc[4]
+tmax = misc[5]
 
 x = np.arange(0,pi,d)
 y = np.arange(0,pi,d)
@@ -32,7 +34,7 @@ for i in it:
                     ,vmin=umin,vmax=umax
                     ,alpha=0.9
                     )
-    ax.set_title(rf'$t = {i*dt:.3f}$')
+    ax.set_title(rf'$t = {i*dt*tmax/sec:.3f}$')
     #ax.contour(X, Y, u, zdir='z', offset=umin - 0.1*(umax - umin), cmap=cmap1)
     #ax.contour(X, Y, u, zdir='x', offset=x.min(), cmap=cmap1)
     #ax.contour(X, Y, u, zdir='y', offset=y.max(), cmap=cmap1)

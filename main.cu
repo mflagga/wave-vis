@@ -6,13 +6,12 @@ int main(){
     // fali
     const double c = 1.0;
     // techniczne
-    const int nmax = 5;
-    const int mmax = 5;
+    const int nmax = 15;
+    const int mmax = 15;
     const double d = 0.01;
-    const double dt = 0.05;
     // animacji
     const double tmax = 10.0;
-    const int fps = 10;
+    const int fps = 24;
     const double seconds = 10.0;
 
     // parametry wtórne
@@ -20,9 +19,9 @@ int main(){
     const int ny = int(M_PI/d);
     const int N = (nx+1)*(ny+1);
     double t;
-    const int itmax = int(tmax/dt);
-    const int co_ktora=int(itmax/(fps*seconds));
+    const int itmax = int(fps*seconds);
     const int ip = itmax/100;
+    const double dt = 1.0/fps;
 
     // architektura
     int tp1 = 256;
@@ -50,17 +49,17 @@ int main(){
     // pętla po czasie // trzeba ją zmienić. założenie jest błędne, chcemy zapisywać każdą klatkę bo rozwiązanie nie zależy od dt
     for (int it=0; it<=itmax; it++){
         if (it%ip==0) cout<<"\r"<<it/ip<<"%"<<flush;
-        t = it*dt;
+        t = it*dt*tmax/seconds;
         fillU<<<blocks2,threads2>>>(u,t,nx,ny,nmax,mmax,x,y,c);
         cudaDeviceSynchronize();
-        if (it%co_ktora==0) saveU(u,uC,nx,ny,N,ufile,it);
+        saveU(u,uC,nx,ny,N,ufile,it);
     }
     cout<<'\n';
 
     // mierzenie czasu
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
-    cout<<"Czas pętli: "<<duration.count()<<" ms\n";
+    cout<<"Czas pętli: "<<duration.count()/1000.0<<" s\n";
 
     // przekaz c++ -> python
     ofstream misc("misc.dat");
@@ -69,6 +68,8 @@ int main(){
     <<ny<<'\n'
     <<d<<'\n'
     <<dt<<'\n'
+    <<seconds<<'\n'
+    <<tmax<<'\n'
     ;
     // przekaz c++ -> ffmpeg
     ofstream fpsfile("fps.dat");
