@@ -4,15 +4,15 @@ int main(){
 
     // parametry
     // fali
-    const double c = 1.0;
+    const double c = 2.0;
     // techniczne
     const int nmax = 15;
     const int mmax = 15;
     const double d = 0.01;
     // animacji
-    const double tmax = 10.0;
-    const int fps = 24;
-    const double seconds = 10.0;
+    const double tmax = 5.0;
+    const int fps = 12;
+    const double seconds = 5.0;
 
     // parametry wtórne
     const int nx = int(M_PI/d);
@@ -48,7 +48,7 @@ int main(){
 
     // pętla po czasie
     for (int it=0; it<=itmax; it++){
-        if (it%int(ip)==0) cout<<'\r'<<int(it/ip)<<'%'<<flush;
+        if (int(ip)!=0) if (it%int(ip)==0) cout<<'\r'<<int(it/ip)<<'%'<<flush;
         t = it*dt*tmax/seconds;
         fillU<<<blocks2,threads2>>>(u,t,nx,ny,nmax,mmax,x,y,c);
         cudaDeviceSynchronize();
