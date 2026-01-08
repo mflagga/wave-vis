@@ -6,8 +6,13 @@ Solve the wave equation $\partial_{tt}^{2}u(x,y,t)=c^2\nabla^2u(x,y,t)$ for the 
 ## Visuals
 ![wave gif](images/wave.gif)
 ## Usage
+1. **Build and run everything:**
 ```bash
 make
+```
+2. **Delete data files, frames and executables:**
+```bash
+make clean
 ```
 ## Technologies
 * CUDA C++
