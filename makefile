@@ -7,13 +7,15 @@ PC = python3
 FRMDIR = frames
 FPS = $(shell cat fps.dat)
 
+DATA = u.dat misc.dat fps.dat
+
 all: wave.mp4
 
 $(EXEC): main.cu header.cuh
-	$(CC) main.cu $(CFLAGS) -o $(EXEC)
+	$(CC) main.cu $(CFLAGS) -o $@
 
-u.dat misc.dat fps.dat: $(EXEC)
-	./$(EXEC)
+$(DATA): $(EXEC)
+	./$+
 
 $(FRMDIR):
 	mkdir -p $(FRMDIR)
@@ -28,7 +30,7 @@ wave.mp4: $(FRMDIR)/.frames_done fps.dat
 
 clean: 
 	rm -f $(EXEC)
-	rm -f u.dat misc.dat fps.dat
+	rm -f $(DATA)
 	rm -f $(FRMDIR)/frame_*.png $(FRMDIR)/.frames_done
 	#rm -f wave.mp4
 
